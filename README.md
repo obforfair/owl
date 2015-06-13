@@ -32,8 +32,8 @@ $ ./owl.php /var/log/nginx/response_time.log
 0.010        /controller/action4 
 ```
 ###3.使用xhprof轻松定位PHP中性能bug
-![](https://github.com/freemenCD/owl/raw/master/Images/xhprof-1.jpg)
-![](https://github.com/freemenCD/owl/raw/master/Images/xhprof-2.jpg)
+![](https://raw.githubusercontent.com/freemanCD/owl/master/Images/xhprof-2.jpg)
+![](https://raw.githubusercontent.com/freemanCD/owl/master/Images/xhprof-1.jpg)
 
 
 
