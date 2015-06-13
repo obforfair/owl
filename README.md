@@ -21,6 +21,10 @@ $ ./owl.php /var/log/nginx/response_time.log
 log_format  response_time '$request_uri - $upstream_response_time';
 access_log /var/log/nginx/response_time.log response_time;
 ```
+讲解：<br>
+    定义一个名为response_time的log_format，只包含两个变量：<br>
+    $request_uri  请求的URL地址<br>
+    $upstream_response_time  PHP处理这个请求消耗的时间<br>
 ###2.执行分析脚本
 reload nginx配置文件，等待nginx处理一些请求之后，运行分析脚本，获得结果：<br>
 ``` bash
