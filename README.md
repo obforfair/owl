@@ -6,11 +6,11 @@
 #分析结果展示
 ``` bash
 $ ./owl.php /var/log/nginx/response_time.log 
-平均处理时间(s) 请求地址 
-28.368       /controller/action1 
-5.045        /controller/action2 
-0.070        /controller/action3 
-0.010        /controller/action4 
+time(s)   count(n)  url       
+28.368    2         /controller/action1 
+5.045     3         /controller/action2 
+0.070     2         /controller/action3
+0.010     1         /controller/action4
 ```
 
 #安装步骤
@@ -29,11 +29,11 @@ access_log /var/log/nginx/response_time.log response_time;
 reload nginx配置文件，等待nginx处理一些请求之后，运行分析脚本，获得结果：<br>
 ``` bash
 $ ./owl.php /var/log/nginx/response_time.log 
-平均处理时间(s) 请求地址 
-28.368       /controller/action1 
-5.045        /controller/action2 
-0.070        /controller/action3 
-0.010        /controller/action4 
+time(s)   count(n)  url       
+28.368    2         /controller/action1 
+5.045     3         /controller/action2 
+0.070     2         /controller/action3
+0.010     1         /controller/action4
 ```
 ###3.使用xhprof轻松定位PHP中性能bug(图片来自网络)
 xhprof确实是个神奇的工具，可以快速定位到那些函数方法最耗时间：<br>
