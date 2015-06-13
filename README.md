@@ -38,7 +38,7 @@ $ ./owl.php /var/log/nginx/response_time.log
 3   0.148               0.148                         2         /controller/action3
 4   0.100               0.100                         1         /controller/action4
 ```
-###3.使用xhprof轻松定位PHP中性能bug(图片来自网络)
+#使用xhprof轻松定位PHP中性能bug(图片来自网络)
 xhprof确实是个神奇的工具，可以快速定位到那些函数方法最耗时间：<br>
 ![](https://raw.githubusercontent.com/freemanCD/owl/master/Images/xhprof-2.jpg)
 ![](https://raw.githubusercontent.com/freemanCD/owl/master/Images/xhprof-1.jpg)
