@@ -6,28 +6,33 @@ $pool = [];
 //着行读取nginx日志
 while (($buffer = fgets($logHandle, 4096)) !== false) {
     $bufferArray = explode(' - ', $buffer);
-
+    count($bufferArray)==3 or die("你的log_format确定是'\$request_uri - \$request_time - \$upstream_response_time'?\n");
     if (!$bufferArray) continue;
     if (isset($pool[$bufferArray[0]])) {
-        $pool[$bufferArray[0]]['time'] += $bufferArray[1];
+        $pool[$bufferArray[0]]['request_time'] += $bufferArray[1];
+        $pool[$bufferArray[0]]['upstream_response_time'] += $bufferArray[2];
         $pool[$bufferArray[0]]['count']++;
     } else {
         $pool[$bufferArray[0]] = [
-            'time' => $bufferArray[1],
+            'request_time' => $bufferArray[1],
+            'upstream_response_time' => $bufferArray[2],
             'count' => 1
         ];
     }
 }
 
-$output = [];
+$requestTime = [];
 foreach ($pool as $url => $data) {
-    $output[$url] = number_format($data['time'] / $data['count'], 3);
+    $requestTime[$url] = number_format($data['request_time'] / $data['count'], 3);
 }
-arsort($output);
-
+arsort($requestTime);
 //格式化输出
-echo str_pad('time(s)', 10, ' ') . str_pad('count(n)', 10, ' ') . str_pad('url', 10, ' ') . "\n";
-foreach ($output as $url => $time) {
-    echo str_pad($time, 10, ' ') . str_pad($pool[$url]['count'], 10, ' ') . str_pad($url, 10, ' ') . "\n";
+echo str_pad('request_time(s)', 20, ' ') . str_pad('upstream_response_time(s)', 30, ' ') . str_pad('count(n)', 10, ' ') . str_pad('url', 10, ' ') . "\n";
+foreach ($requestTime as $url => $time) {
+    $requestTimePad = str_pad($time, 20, ' ');
+    $upstreamResponseTimePad = str_pad(number_format($pool[$url]['upstream_response_time'] / $pool[$url]['count'], 3), 30, ' ');
+    $countPad = str_pad($pool[$url]['count'], 10, ' ');
+    $urlPad = str_pad($url, 10, ' ');
+    echo $requestTimePad . $upstreamResponseTimePad . $countPad . $urlPad . "\n";
 }
 ?>

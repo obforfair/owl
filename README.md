@@ -6,11 +6,11 @@
 #分析结果展示
 ``` bash
 $ ./owl.php /var/log/nginx/response_time.log 
-time(s)   count(n)  url       
-28.368    2         /controller/action1 
-5.045     3         /controller/action2 
-0.070     2         /controller/action3
-0.010     1         /controller/action4
+request_time(s)     upstream_response_time(s)     count(n)  url       
+25.154              24.654                        2         /controller/action1 
+13.328              13.328                        3         /controller/action2 
+0.148               0.148                         2         /controller/action3 
+0.001               0.001                         1         /controller/action4 
 ```
 
 #安装步骤
@@ -18,22 +18,23 @@ time(s)   count(n)  url
 ###1.格式化nginx请求日志
 在nginx的http指令中增加
 ``` bash
-log_format  response_time '$request_uri - $upstream_response_time';
+log_format  response_time '$request_uri - $request_time - $upstream_response_time';
 access_log /var/log/nginx/response_time.log response_time;
 ```
 讲解：<br>
     定义一个名为response_time的log_format，只包含两个变量：<br>
     $request_uri  请求的URL地址<br>
+    $request_time 整个http请求的处理时间这个时间大于等于$upstream_response_time
     $upstream_response_time  PHP处理这个请求消耗的时间<br>
 ###2.执行分析脚本
 reload nginx配置文件，等待nginx处理一些请求之后，运行分析脚本，获得结果：<br>
 ``` bash
 $ ./owl.php /var/log/nginx/response_time.log 
-time(s)   count(n)  url       
-28.368    2         /controller/action1 
-5.045     3         /controller/action2 
-0.070     2         /controller/action3
-0.010     1         /controller/action4
+request_time(s)     upstream_response_time(s)     count(n)  url       
+25.154              24.654                        2         /controller/action1 
+13.328              13.328                        3         /controller/action2 
+0.148               0.148                         2         /controller/action3 
+0.001               0.001                         1         /controller/action4 
 ```
 ###3.使用xhprof轻松定位PHP中性能bug(图片来自网络)
 xhprof确实是个神奇的工具，可以快速定位到那些函数方法最耗时间：<br>
