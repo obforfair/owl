@@ -24,6 +24,8 @@ foreach ($pool as $url => $data) {
     $output[$url] = number_format($data['time'] / $data['count'], 3);
 }
 arsort($output);
+
+//格式化输出
 echo str_pad('time(s)', 10, ' ') . str_pad('count(n)', 10, ' ') . str_pad('url', 10, ' ') . "\n";
 foreach ($output as $url => $time) {
     echo str_pad($time, 10, ' ') . str_pad($pool[$url]['count'], 10, ' ') . str_pad($url, 10, ' ') . "\n";
