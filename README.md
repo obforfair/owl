@@ -37,7 +37,7 @@ $ ./owl.php /var/log/nginx/response_time.log
 
 #小技巧
 ###1.记录多个nginx日志
-可能因为其他原因不能随便修改nginx日志格式，不用担心，nginx支持记录多个nginx日志，主要再增加一行access_log指令即可：<br>
+可能因为其他原因不能随便修改nginx日志格式，不用担心，nginx支持记录多个nginx日志，主要再增加一行`access_log`指令即可：<br>
 ``` bash
 access_log /var/log/nginx/response_time.log response_time;
 ```
