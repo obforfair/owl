@@ -6,9 +6,9 @@
 #分析结果展示
 ``` bash
 $ ./owl.php /var/log/nginx/response_time.log 
-平均处理时间 请求地址 
-28.368       /im/getStudentContactList 
-5.045        /student_center/index3 
-0.070        /im/cardTypeForUrls 
-0.010        /favicon.ico 
+平均处理时间(s) 请求地址 
+28.368       /controller/action1 
+5.045        /controller/action2 
+0.070        /controller/action3 
+0.010        /controller/action4 
 ```

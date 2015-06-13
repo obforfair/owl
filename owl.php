@@ -23,7 +23,7 @@ foreach($pool as $url => $data){
     $output[$url]=number_format($data['time']/$data['count'],3);
 }
 arsort($output);
-echo str_pad("平均处理时间",15,' ')." 请求地址 \n";
+echo str_pad("平均处理时间(s)",15,' ')." 请求地址 \n";
 foreach($output as $url => $time){
     echo str_pad($time,12,' ')." $url \n";
 }
