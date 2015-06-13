@@ -22,10 +22,10 @@ log_format  response_time '$request_uri - $request_time - $upstream_response_tim
 access_log /var/log/nginx/response_time.log response_time;
 ```
 讲解：<br>
-    定义一个名为response_time的log_format，只包含两个变量：<br>
-    $request_uri  请求的URL地址<br>
-    $request_time 整个http请求的处理时间,这个时间大于等于$upstream_response_time<br>
-    $upstream_response_time  PHP处理这个请求消耗的时间<br>
+    定义一个名为response_time的log_format，只包含`三个`变量：<br>
+    `$request_uri`  请求的URL地址<br>
+    `$request_time` 整个http请求的处理时间,这个时间大于等于$upstream_response_time<br>
+    `$upstream_response_time`  PHP处理这个请求消耗的时间<br>
 ###2.执行分析脚本
 reload nginx配置文件，等待nginx处理一些请求之后，运行分析脚本，获得结果：<br>
 ``` bash
