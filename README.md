@@ -12,7 +12,12 @@ request_time(s)     upstream_response_time(s)     count(n)  url
 0.148               0.148                         2         /controller/action3 
 0.001               0.001                         1         /controller/action4 
 ```
-
+术语说明：<br>
+    定义一个名为response_time的log_format，只包含`三个`变量：<br>
+    `$request_uri`  请求的URL地址<br>
+    `$request_time` 整个http请求的处理时间,这个时间大于等于$upstream_response_time<br>
+    `$upstream_response_time`  PHP处理这个请求消耗的时间<br>
+    
 #安装步骤
 本公司的生成环境是Nginx + PHP-FPM，所以这里以分析nginx日志为例进行介绍：<br>
 ###1.格式化nginx请求日志
@@ -21,11 +26,7 @@ request_time(s)     upstream_response_time(s)     count(n)  url
 log_format  response_time '$request_uri - $request_time - $upstream_response_time';
 access_log /var/log/nginx/response_time.log response_time;
 ```
-讲解：<br>
-    定义一个名为response_time的log_format，只包含`三个`变量：<br>
-    `$request_uri`  请求的URL地址<br>
-    `$request_time` 整个http请求的处理时间,这个时间大于等于$upstream_response_time<br>
-    `$upstream_response_time`  PHP处理这个请求消耗的时间<br>
+
 ###2.执行分析脚本
 reload nginx配置文件，等待nginx处理一些请求之后，运行分析脚本，获得结果：<br>
 ``` bash
