@@ -6,11 +6,11 @@
 #分析结果展示
 ``` bash
 $ ./owl.php /var/log/nginx/response_time.log 
-request_time(s)     upstream_response_time(s)     count(n)  url       
-25.154              24.654                        2         /controller/action1 
-13.328              13.328                        3         /controller/action2 
-0.148               0.148                         2         /controller/action3 
-0.001               0.001                         1         /controller/action4 
+    request_time(s)     upstream_response_time(s)     count(n)  url       
+1   25.154              24.654                        2         /controller/action1
+2   13.328              13.328                        3         /controller/action2
+3   0.148               0.148                         2         /controller/action3
+4   0.100               0.100                         1         /controller/action4   
 ```
 结果字段说明：<br>
     `request_time` 整个http请求的处理时间,这个时间大于等于$upstream_response_time<br>
@@ -32,11 +32,11 @@ access_log /var/log/nginx/response_time.log response_time;
 reload nginx配置文件，等待nginx处理一些请求之后，运行分析脚本，获得结果：<br>
 ``` bash
 $ ./owl.php /var/log/nginx/response_time.log 
-request_time(s)     upstream_response_time(s)     count(n)  url       
-25.154              24.654                        2         /controller/action1 
-13.328              13.328                        3         /controller/action2 
-0.148               0.148                         2         /controller/action3 
-0.001               0.001                         1         /controller/action4 
+    request_time(s)     upstream_response_time(s)     count(n)  url       
+1   25.154              24.654                        2         /controller/action1
+2   13.328              13.328                        3         /controller/action2
+3   0.148               0.148                         2         /controller/action3
+4   0.100               0.100                         1         /controller/action4
 ```
 ###3.使用xhprof轻松定位PHP中性能bug(图片来自网络)
 xhprof确实是个神奇的工具，可以快速定位到那些函数方法最耗时间：<br>
